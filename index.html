@@ -193,12 +193,21 @@ header.scrolled {
 }
 
 .logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 400;
-  font-size: 22px;
-  letter-spacing: 4px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 3px;
   color: var(--text);
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  height: 28px;
+  width: auto;
+  display: block;
 }
 
 nav {
@@ -767,10 +776,19 @@ footer {
 }
 
 .footer-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
-  letter-spacing: 4px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 3px;
   color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-logo .logo-img {
+  height: 22px;
+  opacity: 0.6;
 }
 
 /* ─── LIGHTBOX ─── */
@@ -999,7 +1017,10 @@ footer {
 
 <!-- HEADER -->
 <header id="header">
-  <a href="#" class="logo">KIVX GROUP</a>
+  <a href="#" class="logo">
+    <img src="favicon.png" alt="logo" class="logo-img">
+    KIVX GROUP
+  </a>
   <nav>
     <a href="#work">Work</a>
     <a href="#services">Services</a>
@@ -1169,7 +1190,10 @@ footer {
     <a href="https://behance.net/kivxgroup" target="_blank" rel="noopener">Behance</a>
     <a href="mailto:info@kivxgroup.com">Email</a>
   </div>
-  <span class="footer-logo">KIVX</span>
+  <div class="footer-logo">
+    <img src="favicon.png" alt="logo" class="logo-img">
+    KIVX GROUP
+  </div>
 </footer>
 
 <!-- SERVICE MODAL -->
@@ -1393,6 +1417,7 @@ function openServiceModal(folder) {
   serviceModal.classList.add('open');
   requestAnimationFrame(() => serviceModal.classList.add('visible'));
   document.body.style.overflow = 'hidden';
+  history.pushState({ modal: folder }, '', '#' + folder);
 
   fetchFolder(folder).then(items => {
     modalItems = items;
@@ -1440,14 +1465,20 @@ function openServiceModal(folder) {
   });
 }
 
-function closeServiceModal() {
+function closeServiceModal(pushHistory = true) {
   serviceModal.classList.remove('visible');
   setTimeout(() => { serviceModal.classList.remove('open'); }, 300);
   document.body.style.overflow = '';
+  if (pushHistory && location.hash) history.pushState(null, '', location.pathname);
 }
 
-serviceModalClose.addEventListener('click', closeServiceModal);
+serviceModalClose.addEventListener('click', () => closeServiceModal());
 serviceModal.addEventListener('click', e => { if (e.target === serviceModal) closeServiceModal(); });
+
+// Браузерная кнопка «назад» закрывает модал
+window.addEventListener('popstate', e => {
+  if (serviceModal.classList.contains('open')) closeServiceModal(false);
+});
 
 document.querySelectorAll('.service-card[data-folder]').forEach(card => {
   card.addEventListener('click', () => openServiceModal(card.dataset.folder));
