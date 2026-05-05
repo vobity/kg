@@ -152,9 +152,9 @@ body.hovering #cursor-ring { width: 48px; height: 48px; opacity: 0.6; }
 
 .mobile-nav a:hover { color: var(--text-dim); transform: translateX(8px); }
 
-@media (max-width: 640px) {
-  nav { display: none; }
-  .burger { display: flex; }
+@media (max-width: 768px) {
+  nav { display: none !important; }
+  .burger { display: flex !important; }
   header {
     padding: 0 5%;
     height: 60px;
@@ -169,7 +169,10 @@ body.hovering #cursor-ring { width: 48px; height: 48px; opacity: 0.6; }
     -webkit-backdrop-filter: blur(12px) !important;
     border-bottom: 1px solid var(--border) !important;
   }
-  .logo { font-size: 18px; }
+  .logo {
+    font-size: 18px;
+    white-space: nowrap;
+  }
 }
 header {
   position: fixed; top: 0; width: 100%;
@@ -978,8 +981,6 @@ footer {
   .clients-row { grid-template-columns: repeat(3, 1fr); }
   .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
   .about-image::before { display: none; }
-  nav { gap: 24px; }
-  nav a { font-size: 11px; letter-spacing: 1.5px; }
 }
 
 @media (max-width: 480px) {
