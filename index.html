@@ -1355,8 +1355,8 @@ async function fetchFolder(folder) {
         } else {
           const base = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload`;
           return {
-            src: `${base}/q_auto,f_auto,w_1200/${res.public_id}.${res.format}`,
-            srcset: `${base}/q_auto,f_auto,w_600/${res.public_id}.${res.format} 600w, ${base}/q_auto,f_auto,w_1200/${res.public_id}.${res.format} 1200w`,
+            src: `${base}/q_auto,f_auto,w_2400/${res.public_id}.${res.format}`,
+            srcset: `${base}/q_auto,f_auto,w_1200/${res.public_id}.${res.format} 1200w, ${base}/q_auto,f_auto,w_2400/${res.public_id}.${res.format} 2400w`,
             type: 'image'
           };
         }
