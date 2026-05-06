@@ -753,6 +753,17 @@ footer {
   gap: 20px;
 }
 
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-socials { justify-content: center; }
+}
+
+.logo-img { filter: invert(1); }
+
 .footer-socials {
   display: flex;
   gap: 28px;
@@ -1190,7 +1201,7 @@ footer {
   <div class="footer-socials">
     <a href="https://instagram.com/kivxgroup" target="_blank" rel="noopener">Instagram</a>
     <a href="https://behance.net/kivxgroup" target="_blank" rel="noopener">Behance</a>
-    <a href="mailto:info@kivxgroup.com">Email</a>
+    <a href="https://linkedin.com/company/kivxgroup" target="_blank" rel="noopener">LinkedIn</a>
   </div>
   <div class="footer-logo">
     <img src="favicon.png" alt="logo" class="logo-img">
@@ -1567,7 +1578,9 @@ fetchFolder('portfolio').then(items => {
     grid.innerHTML = '<p style="padding:60px 5%;color:var(--text-dim);font-size:13px;letter-spacing:2px;text-transform:uppercase">No files found in /portfolio/</p>';
     return;
   }
-  buildGrid(shuffle(items));
+  const shuffled = shuffle(items);
+  allItems = shuffled;
+  buildGrid(shuffled);
 });
 
 /* ─── LIGHTBOX ─── */
@@ -1623,6 +1636,17 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft')  showLB((current - 1 + allItems.length) % allItems.length);
   if (e.key === 'Escape')     closeLB();
 });
+
+// Свайп на мобильном
+let touchStartX = 0;
+lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) showLB((current + 1) % allItems.length);
+    else showLB((current - 1 + allItems.length) % allItems.length);
+  }
+}, { passive: true });
 </script>
 </body>
 </html>
