@@ -250,7 +250,14 @@ nav a:hover::after { width: 100%; }
 
 .hero-bg {
   position: absolute; inset: 0;
-  background: url("title.jpg") center/cover no-repeat;
+  overflow: hidden;
+}
+
+.hero-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .hero-bg::after {
@@ -1080,7 +1087,11 @@ footer {
 </nav>
 
 <section class="hero" id="hero-anchor">
-  <div class="hero-bg"></div>
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline preload="auto"
+      src="https://res.cloudinary.com/kivxgroup/video/upload/q_auto/Animation_for_WEB_w_o_md6gtk.mp4">
+    </video>
+  </div>
   <div class="hero-content">
     <p class="hero-eyebrow">Architectural Visualization Studio</p>
     <h1>Visual solutions<br>for <em>new</em> developments</h1>
