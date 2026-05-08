@@ -1019,8 +1019,13 @@ footer {
   .clients-row { grid-template-columns: repeat(3, 1fr); }
   .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
   .about-image::before { display: none; }
+  .client-item img {
+    max-width: 100%;
+    max-height: 60px;
+    width: 100%;
+    object-fit: contain;
+  }
 }
-
 @media (max-width: 480px) {
   .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
   .portfolio-item { aspect-ratio: 3/4; }
@@ -1421,7 +1426,7 @@ fetchFolder('clients').then(items => {
     div.appendChild(img);
     clientsRow.appendChild(div);
   });
-
+  clientsRow.style.gridTemplateColumns = `repeat(${Math.min(items.length, 6)}, 1fr)`;
 });
 
 /* ─── SERVICE MODAL ─── */
