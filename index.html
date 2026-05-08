@@ -1414,8 +1414,7 @@ fetchFolder('clients').then(items => {
   if (!items.length) {
     clientsRow.innerHTML = '<div class="client-item"><span>—</span></div>'.repeat(5);
     return;
-  }
-  clientsRow.innerHTML = '';
+clientsRow.innerHTML = '';
   items.forEach(item => {
     const div = document.createElement('div');
     div.className = 'client-item';
@@ -1426,7 +1425,9 @@ fetchFolder('clients').then(items => {
     div.appendChild(img);
     clientsRow.appendChild(div);
   });
-  clientsRow.style.gridTemplateColumns = `repeat(${Math.min(items.length, 6)}, 1fr)`;
+  if (window.innerWidth > 768) {
+    clientsRow.style.gridTemplateColumns = `repeat(${Math.min(items.length, 6)}, 1fr)`;
+  }
 });
 
 /* ─── SERVICE MODAL ─── */
