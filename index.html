@@ -1414,7 +1414,8 @@ fetchFolder('clients').then(items => {
   if (!items.length) {
     clientsRow.innerHTML = '<div class="client-item"><span>—</span></div>'.repeat(5);
     return;
-clientsRow.innerHTML = '';
+  }
+  clientsRow.innerHTML = '';
   items.forEach(item => {
     const div = document.createElement('div');
     div.className = 'client-item';
